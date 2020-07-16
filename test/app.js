@@ -7,7 +7,7 @@ const app = express();
 const nodemailer = require('nodemailer');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
- 
+
 
 // email connection
 
@@ -21,7 +21,7 @@ var transporter = nodemailer.createTransport({
 
 // parse application/json
 app.use(bodyParser.json())
-// views 
+// views
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
@@ -37,8 +37,17 @@ connection.connect();
 app.get('/',(req,res)=>
 {
 
-    res.render('index');
+    res.render('registration');
 });
+//demo
+app.get('/login',(req,res)=>
+{
+
+    res.render('login');
+});
+
+
+
 app.post('/',(req,res)=>
 {
     var myPass;
@@ -84,7 +93,7 @@ app.post('/',(req,res)=>
                console.log(err);
            }else{
                Store(hash);
-           } 
+           }
 
          });
     });
@@ -101,7 +110,7 @@ app.post('/',(req,res)=>
     // console.log(req.body);
 });
 
-// verification 
+// verification
 app.get('/verify/',(req,res)=>{
     function activateAccount(verify) {
         if(verify == req.query.verify){
